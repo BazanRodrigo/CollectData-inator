@@ -2,7 +2,7 @@
 from PIL import Image
 import requests
 from io import BytesIO
-
+import pygame
 url = 'https://lastfm.freetls.fastly.net/i/u/770x0/144ffbc80d11b8414f7098896e5c233b.jpg'
 
 
