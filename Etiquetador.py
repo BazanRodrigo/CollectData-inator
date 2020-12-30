@@ -1,5 +1,5 @@
 import pygame
-import numpy as np
+import os
 import cv2
 
 def medidas(xd, yd, xu, yu):
@@ -25,6 +25,10 @@ def medidas(xd, yd, xu, yu):
     data = 0, anchob, largob, imagena, imagenl
     return str(data)
 
+def savingData(data):
+    file = open("/home/rodrigo/RecolectDataNator/DataBase/v5.txt", "w")
+    file.write(data + os.linesep)
+    file.close()
 
 def main()  :
     wp = pygame.image.load('/home/rodrigo/RecolectDataNator/DataProgram/WallpaperEtiqueta.jpg')
@@ -58,13 +62,15 @@ def main()  :
                 yu = mu[1]
                 if xu>768 and xu<800 and yu>50 and yu<82:
                     print('Segun guardado XD')
+                    savingData(data)
                     continue
-
+                data = medidas(xd, yd, xu, yu)
                 pygame.draw.rect(window, (144, 12, 63), [492, 0, 720, 40])
-                message = font.render(medidas(xd,yd,xu,yu), 1,(255, 195, 0))
+                message = font.render(data, 1,(255, 195, 0))
                 window.blit(message, (512,0))
                 window.blit(save, (768,50))
                 pygame.display.flip()
+                data = medidas(xd, yd, xu, yu)
 
 
 
