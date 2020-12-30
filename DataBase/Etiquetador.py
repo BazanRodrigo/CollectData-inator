@@ -19,28 +19,31 @@ def medidas(xd, yd, xu, yu):
     largob = round(largob, 5)
     imagena = round(imagena, 5)
     imagenl = round(imagenl, 5)
-    print('Medidas :', width, heigth)
-    print('MouseD: ' , xd, yd)
-    print('MouseU: ' , xu, yu)
-    print('Centros: ' , centerx, centery)
     print('CentroBounding box: ' , anchob, largob)
     print('medidas de bounding box' , imagena, imagenl)
     print('____________________________________')
+    data = 0, anchob, largob, imagena, imagenl
+    return str(data)
 
 
 def main()  :
     wp = pygame.image.load('/home/rodrigo/RecolectDataNator/DataProgram/WallpaperEtiqueta.jpg')
     img = pygame.image.load('/home/rodrigo/RecolectDataNator/DataBase/v5.jpg')
+    save = pygame.image.load('/home/rodrigo/RecolectDataNator/Icons/save.png')
+    restar = pygame.image.load('/home/rodrigo/RecolectDataNator/Icons/restart.png')
+    clean = pygame.image.load('/home/rodrigo/RecolectDataNator/Icons/clean.png')
     pygame.init()
     pygame.display.init()
     window = pygame.display.set_mode()
     pygame.display.set_caption("Tag-inator")
-    font = pygame.font.SysFont("monospace", 15)
+    font = pygame.font.SysFont("monospace", 30)
     window.blit(wp, (0,0))
     window.blit(img, (100,100))
+    pygame.draw.rect(window, (144, 12, 63), [492, 0, 720, 40])
     pygame.display.flip()
     running = True
     while running:
+        pygame.display.flip()
         # Did the user click the window close button?
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -53,7 +56,16 @@ def main()  :
                 mu = pygame.mouse.get_pos()
                 xu = mu[0]
                 yu = mu[1]
-                medidas(xd, yd, xu, yu)
+                if xu>768 and xu<800 and yu>50 and yu<82:
+                    print('Segun guardado XD')
+                    continue
+
+                pygame.draw.rect(window, (144, 12, 63), [492, 0, 720, 40])
+                message = font.render(medidas(xd,yd,xu,yu), 1,(255, 195, 0))
+                window.blit(message, (512,0))
+                window.blit(save, (768,50))
+                pygame.display.flip()
+
 
 
 if __name__ == '__main__':
